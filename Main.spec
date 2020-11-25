@@ -4,7 +4,7 @@ block_cipher = None
 
 
 a = Analysis(['Main.py'],
-             pathex=['C:\\Users\\duque\\Documents\\EAFIT\\6 SEMESTRE\\Analisis numerico\\Metodos_Listos-T\\APP'],
+             pathex=['D:\\Work\\Eafit\\2020-2\\Numerico\\AppNumericoSource'],
              binaries=[],
              datas=[],
              hiddenimports=[],

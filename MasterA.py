@@ -4,6 +4,7 @@ import copy
 import cmath
 import io
 import pandas as pd
+from ExpEval import handleError
 pd.set_option("precision",10)
 
 class EGS():
@@ -11,7 +12,11 @@ class EGS():
         self.matrix = _matrix
         self.output = io.StringIO()
         self.content = None
-        self.solve()
+
+        try:
+            self.solve()
+        except Exception as e:
+            self.content = handleError(e)
         
 
     def solve(self):
@@ -49,7 +54,10 @@ class EGPP():
         self.matrix = _matrix
         self.output = io.StringIO()
         self.content = None
-        self.solve()
+        try:
+            self.solve()
+        except Exception as e:
+            self.content = handleError(e)
 
     def solve(self):
         self.content = self.matrix.showMatrix(self.matrix.ext,self.output)
@@ -82,7 +90,10 @@ class EGPT():
         self.matrix = _matrix
         self.output = io.StringIO()
         self.content = None
-        self.solve()
+        try:
+            self.solve()
+        except Exception as e:
+            self.content = handleError(e)
     
     def solve(self):
         self.output = self.matrix.showMatrix(self.matrix.ext,self.output)
@@ -127,7 +138,10 @@ class LUSM():
         self.matrix = _matrix
         self.output = io.StringIO()
         self.content = None
-        self.solve()
+        try:
+            self.solve()
+        except Exception as e:
+            self.content = handleError(e)
 
     def solve(self):
         self.checkIfFirstZero()    
@@ -172,7 +186,10 @@ class LUPP():
         self.matrix = _matrix
         self.output = io.StringIO()
         self.content = None
-        self.solve()
+        try:
+            self.solve()
+        except Exception as e:
+            self.content = handleError(e)
 
     def solve(self):
         self.checkIfFirstZero()   
@@ -243,7 +260,10 @@ class CROUT():
         self.matrix = _matrix
         self.output = io.StringIO()
         self.content = None
-        self.solve()
+        try:
+            self.solve()
+        except Exception as e:
+            self.content = handleError(e)
 
     def solve(self):
         self.checkIfFirstZero()    
@@ -289,7 +309,10 @@ class DOOL():
         self.matrix = _matrix
         self.output = io.StringIO()
         self.content = None
-        self.solve()
+        try:
+            self.solve()
+        except Exception as e:
+            self.content = handleError(e)
 
     def solve(self):
         self.checkIfFirstZero()    
@@ -335,7 +358,10 @@ class CHOL():
         self.matrix = _matrix
         self.output = io.StringIO()
         self.content = None
-        self.solve()
+        try:
+            self.solve()
+        except Exception as e:
+            self.content = handleError(e)
 
     def solve(self):
         self.checkIfFirstZero()    
@@ -390,7 +416,10 @@ class GSeidel():
 
         self.output = io.StringIO()
         self.content = None
-        self.solve()
+        try:
+            self.solve()
+        except Exception as e:
+            self.content = handleError(e)
 
     def solve(self):
         _D = np.diag(np.diag(self.matrix.A))
@@ -448,7 +477,10 @@ class Jacobi():
 
         self.output = io.StringIO()
         self.content = None
-        self.solve()
+        try:
+            self.solve()
+        except Exception as e:
+            self.content = handleError(e)
 
     def solve(self):
         _D = np.diag(np.diag(self.matrix.A))
@@ -507,7 +539,10 @@ class Sor():
         self.output = io.StringIO()
         self.content = None
 
-        self.solve()
+        try:
+            self.solve()
+        except Exception as e:
+            self.content = handleError(e)
 
     def solve(self):
         _D = np.diag(np.diag(self.matrix.A))

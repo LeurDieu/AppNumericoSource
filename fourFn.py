@@ -168,11 +168,13 @@ def pyParsingEvaluate(s):
         val = evaluate_stack(exprStack[:])
     except ParseException as pe:
         print(s, "failed parse:", str(pe))
+        raise pe
     except Exception as e:
         print(s, "failed eval:", str(e), exprStack)
+        raise e
     else:
         return val
-
+"""
 
 if __name__ == "__main__":
 
@@ -194,7 +196,6 @@ if __name__ == "__main__":
                 print(s + "!!!", val, "!=", expected, results, "=>", exprStack)
             
 
-"""
     test("9", 9)
     test("-9", -9)
     test("--9", 9)

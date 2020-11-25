@@ -99,5 +99,3 @@ class BIS(tk.Frame):
 
     def graficar(self):
         graphP(self.a,self.b,self.f,self.s.solution)
-      
-    

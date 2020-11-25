@@ -2,6 +2,7 @@ from fourFn import pyParsingEvaluate as pypEval
 import numpy as np
 import matplotlib.pyplot as plt
 import re
+import pyparsing
 
 def rangeF(a,b):
     h=np.arange(a,b,0.1)
@@ -78,3 +79,23 @@ def parseArray(_rawData, _size):
     _array = np.array(_parsedData)#.reshape(_size,1)
 
     return _array
+
+def getWarType(_type):
+    return {
+        "Dominio": "Error al evaluar la funcion, verifique su dominio",
+        "Funcion": "Error al parsear la funcion, verifique su sintaxis",
+        "DivZero": "Error al intentar dividir por zero, verifique las entradas",
+    }.get(_type, "Error desconocido, verifique las excepciones del metodo")
+
+def handleError(e):
+    print(e.__class__)
+    if (isinstance(e, ValueError)):
+        return getWarType("Dominio")
+
+    if (isinstance(e, pyparsing.ParseSyntaxException)):
+        return getWarType("Funcion")
+
+    if (isinstance(e, ZeroDivisionError)):
+        return getWarType("DivZero")
+    
+    return getWarType("Error")

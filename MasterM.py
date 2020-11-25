@@ -1,14 +1,19 @@
 from ExpEval import expEval
 from ExpEval import graph
 from ExpEval import graphP
+from ExpEval import handleError
+import pyparsing
 import pandas as pd
 pd.set_option("precision",10)
 
 class busqueda():
     def __init__(self,f,x0,dx,n):
         self.content = None
-        
-        self.solve(f,x0,dx,n)
+
+        try:
+            self.solve(f,x0,dx,n)
+        except Exception as e:
+            self.content = handleError(e)
 
     def solve(self,f,x0,dx,n):
         xant=x0
@@ -27,7 +32,11 @@ class busqueda():
                 resul = resul + (str("Hay una raiz de f en: [" +str(xant)+" , "+str(xact)+" ]\n"))
                 #print("Hay una raiz de f en: ","[ ",xant," , ",xact," ]")
             cont+=1
+
         self.content = "\n\nf(x) = " + f +"\n\n"
+        if(len(resul) < 1):
+            self.content = "No se han encontrado raices"
+            return
         self.content = self.content + resul
 
 class bisec():
@@ -35,7 +44,10 @@ class bisec():
         self.content = None
         self.solution = None
 
-        self.solve(f,a,b,tol,n)
+        try:
+            self.solve(f,a,b,tol,n)
+        except Exception as e:
+            self.content = handleError(e)
 
     def solve(self,f,a,b,tol,n):
         
@@ -74,7 +86,11 @@ class falsaposicion():
         self.content = None
         self.solution = None
 
-        self.solve(f,a,b,tol,n)
+        try:
+            self.solve(f,a,b,tol,n)
+        except Exception as e:
+            self.content = handleError(e)  
+
 
     def solve(self,f,a,b,tol,n):
         error=10
@@ -111,7 +127,10 @@ class newton():
         self.content = None
         self.solution = None
 
-        self.solve(f,fp,p0,tol,n)
+        try:
+            self.solve(f,fp,p0,tol,n)
+        except Exception as e:
+            self.content = handleError(e)  
 
     def solve(self,f,fp,p0,tol,n):
         error=10
@@ -140,7 +159,10 @@ class puntofijo():
         self.content = None
         self.solution = None
 
-        self.solve(f,g,p0,tol,n)
+        try:
+            self.solve(f,g,p0,tol,n)
+        except Exception as e:
+            self.content = handleError(e)  
 
     def solve(self,f,g,p0,tol,n):
         error=100
@@ -170,8 +192,11 @@ class secant():
     def __init__(self,f,p0,p1,tol,n):
         self.content = None
         self.solution = None
-
-        self.solve(f,p0,p1,tol,n)
+        
+        try:
+            self.solve(f,p0,p1,tol,n)
+        except Exception as e:
+            self.content = handleError(e)  
 
     def solve(self,f,p0,p1,tol,n):
         resul=[]
@@ -208,7 +233,10 @@ class rmultiples():
         self.content = None
         self.solution = None
 
-        self.solve(f,fp,fpp,x0,tol,n)
+        try:
+            self.solve(f,fp,fpp,x0,tol,n)
+        except Exception as e:
+            self.content = handleError(e)  
 
     def solve(self,f,fp,fpp,x0,tol,n):
         x=x0

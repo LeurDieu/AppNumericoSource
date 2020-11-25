@@ -8,7 +8,11 @@ class Vandermonde():
         self.output = io.StringIO()
         self.content = None
 
-        self.solve()
+        try:
+            self.solve()
+        except Exception as e:
+            self.content = handleError(e)
+
 
     def solve(self):
         _n = len(self.X)
@@ -41,7 +45,11 @@ class DifDiv():
         self.output = io.StringIO()
         self.content = None
 
-        self.solve()
+        try:
+            self.solve()
+        except Exception as e:
+            self.content = handleError(e)
+
 
     def solve(self):
         _n = len(self.X) 
@@ -83,7 +91,11 @@ class Lagrange():
         self.output = io.StringIO()
         self.content = None
 
-        self.solve()
+        try:
+            self.solve()
+        except Exception as e:
+            self.content = handleError(e)
+
 
     def solve(self):
         _n = len(self.X)
@@ -155,7 +167,11 @@ class TLineal():
         self.output = io.StringIO()
         self.content = None
 
-        self.solve()
+        try:
+            self.solve()
+        except Exception as e:
+            self.content = handleError(e)
+
 
     def solve(self):
         _n = len(self.X)
@@ -199,7 +215,11 @@ class TCuad():
         self.output = io.StringIO()
         self.content = None
 
-        self.solve()
+        try:
+            self.solve()
+        except Exception as e:
+            self.content = handleError(e)
+
 
     def solve(self):
         _n = len(self.X)
@@ -253,7 +273,11 @@ class TCubic():
         self.output = io.StringIO()
         self.content = None
 
-        self.solve()
+        try:
+            self.solve()
+        except Exception as e:
+            self.content = handleError(e)
+
 
     def solve(self):
         _n = len(self.X)
