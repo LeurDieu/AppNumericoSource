@@ -8,6 +8,8 @@ except ImportError:
 from MasterT import TCubic
 from ExpEval import parseMatrix
 from ExpEval import parseArray
+from ExpEval import graphTrazador
+
 from Matrix import Matrix
 class T_CU(tk.Frame):
 
@@ -60,6 +62,10 @@ class T_CU(tk.Frame):
                             command=self.borrarText,width="30",height="2",bg="gray25",fg="cyan2")
 
         button3.place(x=1100,y=140)
+        button4 = tk.Button(self, text="GRAFICAR",
+                            command=self.graficar,width="30",height="2",bg="gray25",fg="cyan2")
+
+        button4.place(x=1100,y=190)
     
     def calcular(self):
         var1=str(self.entradaX.get())
@@ -70,10 +76,17 @@ class T_CU(tk.Frame):
         _Y = parseArray(var2, var3)
 
         _egpt= TCubic(_X,_Y)
-
+        _egpt.solve()
         self.t.pack(side=tk.BOTTOM,padx=50, pady=40, expand= True,fill=tk.BOTH)
         self.t.insert(END,_egpt.content + '\n')
     
     def borrarText(self):
         self.t.delete('1.0', END)
 
+    def graficar(self):
+        var1=str(self.entradaX.get())
+        var2=str(self.entradaY.get()) 
+        var3=int(self.varia.get())
+        _X = parseArray(var1, var3)
+        _Y = parseArray(var2, var3)
+        graphTrazador(_X,_Y,3)

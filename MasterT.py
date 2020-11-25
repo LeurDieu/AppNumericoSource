@@ -1,20 +1,16 @@
 import numpy as np
 import io
+#from ExpEval import handleError
 class Vandermonde():
     def __init__(self, _x, _y):
         self.X = _x
         self.Y = _y
-
         self.output = io.StringIO()
         self.content = None
-
-        try:
-            self.solve()
-        except Exception as e:
-            self.content = handleError(e)
-
+        self.solution=None
 
     def solve(self):
+
         _n = len(self.X)
         _A = np.zeros([_n,_n])
     
@@ -35,21 +31,18 @@ class Vandermonde():
         print ("\nPolinomio:\n",_pol, file = self.output)
 
         self.content = self.output.getvalue()
+        a=_res
         self.output.close()
+        return a
+
 
 class DifDiv():
     def __init__(self, _x, _y):
         self.X = _x
         self.Y = _y
-
         self.output = io.StringIO()
         self.content = None
-
-        try:
-            self.solve()
-        except Exception as e:
-            self.content = handleError(e)
-
+    
 
     def solve(self):
         _n = len(self.X) 
@@ -76,25 +69,20 @@ class DifDiv():
         for f in _res:
             n=str(self.X[cont])
             _pol=_pol+" + ("+str(f)+")"+b
-            b=b+"(x - ("+n+"))"        
+            b=b+"*(x - ("+n+"))"        
             cont+=1
         print(_pol[2:], file = self.output)
-
+        a=_pol[2:]
         self.content = self.output.getvalue()
         self.output.close()
+        return a
 
 class Lagrange():
     def __init__(self, _x, _y):
         self.X = _x
         self.Y = _y
-
         self.output = io.StringIO()
         self.content = None
-
-        try:
-            self.solve()
-        except Exception as e:
-            self.content = handleError(e)
 
 
     def solve(self):
@@ -117,7 +105,7 @@ class Lagrange():
             _exp = _n - 1
             _pol = ""
             for _val in _poli:
-                _pol = _pol + str(_val) + "x^" + str(_exp) + " + "
+                _pol = _pol + str(_val) + "*x^" + str(_exp) + " + "
                 _exp -= 1
             _pol = _pol[:-2]
             _pols.append(_pol)
@@ -157,20 +145,17 @@ class Lagrange():
 
         self.content = self.output.getvalue()
         self.output.close()
+        a=polext[3:]
+        return a
+
 
 
 class TLineal():
     def __init__(self, _x, _y):
         self.X = _x
         self.Y = _y
-
         self.output = io.StringIO()
         self.content = None
-
-        try:
-            self.solve()
-        except Exception as e:
-            self.content = handleError(e)
 
 
     def solve(self):
@@ -200,26 +185,25 @@ class TLineal():
         for _co in _coef:
             print(_co[0],' ',_co[1], file = self.output)
         print ("\nTrazadores:\n", file = self.output)
+        a=[]
         for _tra in _coef:
-            print(str(_tra[0])+'x + ',_tra[1], file = self.output)
+            b=str(_tra[0])+'*x + '+str(_tra[1])
+            print(b, file=self.output)
+            a.append(b)
 
         self.content = self.output.getvalue()
         self.output.close()
+        return a
 
 
 class TCuad():
     def __init__(self, _x, _y):
         self.X = _x
         self.Y = _y
-
         self.output = io.StringIO()
         self.content = None
 
-        try:
-            self.solve()
-        except Exception as e:
-            self.content = handleError(e)
-
+     
 
     def solve(self):
         _n = len(self.X)
@@ -259,24 +243,23 @@ class TCuad():
         for _co in _coef:
             print(_co[0],' ',_co[1],' ',_co[2], file = self.output)
         print ("\nTrazadores:\n", file = self.output)
+        
+        a=[]
         for _tra in _coef:
-            print(str(_tra[0])+'x^2 + ', str(_tra[1])+ 'x + ',_tra[2], file = self.output)
-
+            b=str(_tra[0])+'*x^2 + '+ str(_tra[1])+ '*x + '+str(_tra[2])
+            print(str(b),file=self.output)
+            a.append(b)
         self.content = self.output.getvalue()
         self.output.close()
+        return a
 
 class TCubic():
     def __init__(self, _x, _y):
         self.X = _x
         self.Y = _y
-
         self.output = io.StringIO()
         self.content = None
 
-        try:
-            self.solve()
-        except Exception as e:
-            self.content = handleError(e)
 
 
     def solve(self):
@@ -325,9 +308,12 @@ class TCubic():
         for _co in _coef:
             print(_co[0],' ',_co[1],' ',_co[2],' ',_co[3], file = self.output)
 
-        print ("\nTrazadores:\n", file = self.output)
+        print ("\nTrazadores:\n", file = self.output)   
+        a=[]
         for _tra in _coef:
-            print(str(_tra[0])+'x^3 + ', str(_tra[1])+'x^2 + ', str(_tra[2])+ 'x + ',_tra[3], file = self.output)
-            
+            b=str(_tra[0])+'*x^3 + '+ str(_tra[1])+'*x^2 + '+str(_tra[2])+ '*x + '+str(_tra[3])
+            print(b, file=self.output)
+            a.append(b)
         self.content = self.output.getvalue()
         self.output.close()
+        return a

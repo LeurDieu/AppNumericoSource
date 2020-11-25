@@ -78,7 +78,7 @@ class StartPage(tk.Frame):
         label =tk.Label(self,text="*En esta herramienta va a encontrar tres opciones para resolver sistemas de ecuaciones,",fg="gray25", font=("Comic Seans MS",15),width="80",height="2",bg="light sea green")
         label.pack()
 
-        label =tk.Label(self,text="puede ser por medio de metodos numericos, por medio de metodos matriciales o por trazadores:*",fg="gray25", font=("Comic Seans MS",15),width="80",height="2",bg="light sea green")
+        label =tk.Label(self,text="puede ser por medio de metodos numericos, metodos matriciales o por metodos de interpolación*",fg="gray25", font=("Comic Seans MS",15),width="80",height="2",bg="light sea green")
         label.pack()
 
         label =tk.Label(self,text=" ",fg="gray25", font=("Comic Seans MS",15),width="80",height="5")

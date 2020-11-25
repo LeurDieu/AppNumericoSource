@@ -9,6 +9,7 @@ from MasterT import DifDiv
 from ExpEval import parseMatrix
 from ExpEval import parseArray
 from Matrix import Matrix
+from ExpEval import graphNewton
 
 class N_M(tk.Frame):
 
@@ -21,7 +22,7 @@ class N_M(tk.Frame):
         self.varia=tk.StringVar(self)
 
         self.t = tk.Text(self)
-
+        
         label = tk.Label(self, text="NEWTON", font=("controller.title_font",30),width="60",height="0",fg="cyan2")
         label.pack()
 
@@ -61,6 +62,11 @@ class N_M(tk.Frame):
                             command=self.borrarText,width="30",height="2",bg="gray25",fg="cyan2")
 
         button3.place(x=1100,y=140)
+
+        button4 = tk.Button(self, text="GRAFICAR",
+                            command=self.graficar,width="30",height="2",bg="gray25",fg="cyan2")
+
+        button4.place(x=1100,y=190)
     
     def calcular(self):
         var1=str(self.entradaX.get())
@@ -71,9 +77,17 @@ class N_M(tk.Frame):
         _Y = parseArray(var2, var3)
 
         _egpt= DifDiv(_X,_Y)
-
+        _egpt.solve()
         self.t.pack(side=tk.BOTTOM,padx=50, pady=40, expand= True,fill=tk.BOTH)
         self.t.insert(END,_egpt.content + '\n')
     
     def borrarText(self):
         self.t.delete('1.0', END)
+
+    def graficar(self):
+        var1=str(self.entradaX.get())
+        var2=str(self.entradaY.get()) 
+        var3=int(self.varia.get())
+        _X = parseArray(var1, var3)
+        _Y = parseArray(var2, var3)
+        graphNewton(_X,_Y)
